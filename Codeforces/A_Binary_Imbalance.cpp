@@ -12,20 +12,13 @@ int main(){
         string s;
         cin>>s;
 
-        if(n==1){
-            if(s[0]=='0')cout<<"YES"<<endl;
-            else cout<<"NO"<<endl;
+        int cnt = 0;
+        for(int i=0;i<n;i++){
+            if(s[i]=='1')cnt++;
         }
-        else{
-            int cnt0 = 0,cnt1 = 0;
-            for(int i=0;i<n;i++){
-                if(s[i]=='0')cnt0++;
-                else cnt1++;
-            }
 
-            if(cnt0!=0) cout<<"YES"<<endl;
-            else cout<<"NO"<<endl;
-        }
+        if(cnt==n) cout<<"NO"<<endl;
+        else cout<<"YES"<<endl;
     }
     return 0;
 }

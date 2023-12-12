@@ -11,7 +11,7 @@ int main(){
 
         vector<long long> a(n);
         long long ans = 0;
-        unordered_set<long long> st;
+        set<long long> st;
         for(int i=0;i<n;i++){
             cin>>a[i];
             st.insert(a[i]);
@@ -21,17 +21,13 @@ int main(){
             cout<<1<<endl;
         }
         else{
-            vector<long long> diff;
-            for(int i=1;i<n;i++){
-                diff.push_back(abs(a[i] - a[i-1]));
+            sort(a.begin(),a.end());
+            long long x = abs(a[1]-a[0]);
+            for(int i=2;i<n;i++){
+                x = __gcd(x,abs(a[i]-a[i-1]));
             }
 
-            long long x = diff[0];
-            for(int i=1;i<diff.size();i++){
-                x = __gcd(x,diff[i]);
-            }
-
-            long long maxi = *max_element(a.begin(),a.end());
+            long long maxi = a[n-1];
             long long k = maxi - x;
 
             while(true){
