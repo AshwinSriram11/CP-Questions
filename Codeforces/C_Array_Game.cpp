@@ -14,25 +14,30 @@ int main(){
             cin>>v[i];
         }
 
-        if(k>=3) cout<<0<<endl;
-        else{
-            vector<long long> diff;
-            for(int i=0;i<n;i++){
-                for(int j=i+1;j<n;j++){
-                    diff.push_back(abs(v[i]-v[j]));
-                }
+        sort(v.begin(),v.end());
+        if(k<=2){
+            long long ans = v[0];
+            for(int i=1;i<n;i++){
+                ans = min(ans,abs(v[i]-v[i-1]));
+            }
+                
+            if(k==1) {
+                cout<<ans<<endl;
+                continue;
             }
 
-            sort(diff.begin(),diff.end());
-            if(k==1) cout<<diff[0]<<endl;
-            else{
-                sort(diff.begin(),diff.end());
-                long long ans = 1e9;
-                for(int i=0;i<n;i++){
-                    ans = min(ans,abs(diff[0]-v[i]));
+            for(int i=0;i<n;i++){
+                for(int j=0;j<i;j++){
+                    long long x = v[i] - v[j];
+                    int k = lower_bound(v.begin(),v.end(),x) - v.begin();
+                    if(k<n) ans = min(ans,v[k] - x);
+                    if(k>0) ans = min(ans,x - v[k-1]);
                 }
-                cout<<min(ans,diff[0])<<endl;
             }
+            cout<<ans<<endl;
+        }
+        else{
+            cout<<0<<endl;
         }
     }
 
